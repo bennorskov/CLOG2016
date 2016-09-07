@@ -11,7 +11,6 @@ public class lightTrigger : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		
 	}
 
 	// when something enters the Trigger attached to this gameObject
