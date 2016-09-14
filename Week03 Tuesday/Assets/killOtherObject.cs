@@ -2,11 +2,9 @@
 using System.Collections;
 
 public class killOtherObject : MonoBehaviour {
-	int lives = 30;
 
+	//Use the collider from a collision to destroy the gameobject attached to it. 
 	void OnTriggerExit( Collider otherObj ) {
-		otherObj.transform.position = otherObj.transform.position + Vector3.up * 40;
-		otherObj.gameObject.GetComponent<Rigidbody>().velocity = Vector3.zero;
-		Debug.Log("thing moving out of the box");
+		Destroy(otherObj.gameObject);
 	}
 }
