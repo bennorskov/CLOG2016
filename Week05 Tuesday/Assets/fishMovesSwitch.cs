@@ -4,7 +4,7 @@ using System.Collections;
 public class fishMovesSwitch : MonoBehaviour {
 
 	// declare state constants
-	// const is optional, but it tells the computer that the value won't change
+	// an enum is a type of variable that you create to make your states more readable. 
 	private enum fishStates {
 		WAITING_ON_LURE,
 		FOLLOWING_LURE,
@@ -26,22 +26,26 @@ public class fishMovesSwitch : MonoBehaviour {
 		pickNewPosition();
 	}
 
+	//————————————————————————————————————————————————————————————————————————————————— Update Loop
 	void Update () {
 		// the most efficient way of writing this is with a switch statement. 
 		// if, else if works just fine though, and is only nominally slower
 		switch (state) {
-			case fishStates.WAITING_ON_LURE:
-				fishWaitingActions();
-				break;
 			case fishStates.FOLLOWING_LURE:
 				fishFollowActions();
 				break;
 			case fishStates.CAUGHT_ON_LURE:
 				fishCaughtActions();
 				break;
+			case fishStates.WAITING_ON_LURE:
+			default:
+				fishWaitingActions();
+				break;
 		}
 
 	}
+
+	//————————————————————————————————————————————————————————————————————————————————— Triggers
 	// Trigger checks to see if lure is close enough to follow
 	void OnTriggerEnter(Collider otherCollider) {
 		// the lure comes close enough to the fish so it starts following
@@ -63,19 +67,21 @@ public class fishMovesSwitch : MonoBehaviour {
 		transform.rotation = Quaternion.EulerAngles( Vector3.right * -90f ); // so the fish hangs down
 	}
 
+	//————————————————————————————————————————————————————————————————————————————————— Actions
 	void fishWaitingActions() {
 		// code to wander around
 		transform.LookAt( positionToSwimTo );
 		transform.position += transform.forward * Time.deltaTime * fishWanderSpeed;
 		if (Vector3.Distance( transform.position, positionToSwimTo ) < minDistanceToGetNewPosition) {
+			//if close enough to point, pick a new one
 			pickNewPosition();
 		}
 	}
 	void pickNewPosition() {
 		//pick a new random position to wander to
-		Vector3 tempPos = transform.position + (Random.insideUnitSphere * 10f);
-		tempPos.y = transform.position.y;
-		positionToSwimTo = tempPos;
+		Vector3 tempPosition = transform.position + (Random.insideUnitSphere * 10f);
+		tempPosition.y = transform.position.y; // keep the y the same, so the fish doesn't swim up and down
+		positionToSwimTo = tempPosition;
 	}
 
 	void fishFollowActions() {
@@ -88,4 +94,5 @@ public class fishMovesSwitch : MonoBehaviour {
 	void fishCaughtActions() {
 		transform.position = lurePosition.position;
 	}
+
 }
