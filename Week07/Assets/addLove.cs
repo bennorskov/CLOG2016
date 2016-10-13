@@ -2,7 +2,6 @@
 using System.Collections;
 
 public class addLove : MonoBehaviour {
-
 	loveHandler lvHand;
 	public int howMuchLoveYouHave = 5;
 	ParticleSystem heartShooter;
@@ -10,11 +9,10 @@ public class addLove : MonoBehaviour {
 	void Start() {
 		lvHand = GameObject.Find("Love Counter").GetComponent<loveHandler>();
 		heartShooter = GetComponentInChildren<ParticleSystem>();
-		print(heartShooter);
 	}
 
 	public void giveLoveToCounter() {
 		lvHand.addToTotalLove( howMuchLoveYouHave );
-		heartShooter.Play();
+		heartShooter.Play(); // make hearts come out
 	}
 }

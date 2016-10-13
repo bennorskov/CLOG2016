@@ -9,6 +9,7 @@ public class loveHandler : MonoBehaviour {
 
 	void Start () {
 		scoreText = GetComponent<Text>();
+		scoreText.text = "Total Love: 0";
 	}
 	
 	public void addToTotalLove( int thisMuchMoreLove) {

@@ -11,9 +11,10 @@ public class firstPersonLover : MonoBehaviour {
 	
 	void Update () {
 		crosshair.color = Color.white;
-		RaycastHit nfo;
-		if (Physics.Raycast(transform.position, transform.forward, out nfo) ) {
-			if (nfo.transform.CompareTag("Friend")) {
+		RaycastHit nfo; //how you get information about what you hit
+		if (Physics.Raycast(transform.position, transform.forward, out nfo) == true ) {
+			if ( nfo.transform.CompareTag("Friend") == true ) { 
+				// nfo.transform.tag == "Friend"
 				crosshair.color = Color.red;
 				if ( Input.GetMouseButtonDown(0) ) {
 					nfo.transform.GetComponent<addLove>().giveLoveToCounter();
