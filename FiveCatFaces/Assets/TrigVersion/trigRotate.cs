@@ -20,9 +20,7 @@ public class trigRotate : MonoBehaviour {
 	}
 	
 	void Update () {
-
 		// print(targetRotation*Mathf.Rad2Deg + " | " + angle*Mathf.Rad2Deg);
-
 		float nintyOffest = Mathf.PI*.5f;
 		angle -= (angle + targetRotation) * easing;
 		for(int i = 0; i<childCats.Length; i++) {
